@@ -64,7 +64,42 @@ class Solution:
             #     hashMap[num]=1
         return res
                 
-     
-        
+
+#HBinary Search Solution:
+#Time complexity:O(mlogn),n-smaller array length
+#Space Complexity:O(min(m,n))
+#Algorithm:
+#1.Use binary search to search the element present in arr1 in arr2. 
+
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        def binary_search(nums, num):
+            left = 0
+            right = len(nums) - 1
+
+            while left <= right:
+                mid = (left + right) // 2       
+                if nums[mid] == num:
+                    return mid 
+                if nums[mid] > num:
+                    right = mid - 1
+                elif nums[mid] < num:
+                    left = mid + 1
+            return -1
+            
+        if len(nums1) > len(nums2):
+            nums1, nums2 = nums2, nums1
+            
+        nums1.sort()
+        res = []
+        for num in nums2:
+            index = binary_search(nums1, num)
+            if index != -1:
+                res.append(nums1[index])
+                nums1.pop(index)
+                
+        return res
         
        
