@@ -29,3 +29,42 @@ class Solution:
                 ptr2+=1
             
         return result
+    
+ 
+#HashMapSolution:
+#Time complexity:O(max(m+n))
+#Space Complexity:O(min(m,n))
+#Algorithm:
+#1.Create hashMap for the bigger array by keeping the lements and its repetition count. This is ensured by making nums1 as alaways bigger one if it is not by input itself  BY SWAPPING.
+#2. Now iterate nums in nums2 and see if it exsting in hashMap , if so append to result and decrement its count. 
+
+
+
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # if not nums1 or not nums2 or len(nums1)==0 or len(nums2)==0:
+        #     return []
+        hashMap=dict()
+        res=[]
+        if len(nums2)>len(nums1):
+            temp = nums1
+            nums1 = nums2
+            nums2 = temp
+        for num in nums1:
+            if num not in hashMap:
+                 hashMap[num]=0
+            hashMap[num]+=1
+        for num in nums2:
+            # if num in hashMap and hashMap[num]==0 :
+            #     hashMap.pop(num)
+            if num in hashMap and hashMap[num]>0 :
+                res.append(num)
+                hashMap[num]-=1
+            # else:
+            #     hashMap[num]=1
+        return res
+                
+     
+        
+        
+       
